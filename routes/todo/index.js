@@ -12,5 +12,15 @@ router.get('/', (req, res) => {
     })
 });
 
+router.post('/add', (req, res) => {
+    const todo = new Todo(req.body);
+    todo.save((err) => {
+        if(err) {
+            res.send(err);
+        } else {
+            res.send(todo);
+        }
+    });
+})
 
 module.exports = router;

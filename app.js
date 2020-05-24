@@ -4,6 +4,10 @@ const todoRoutes = require('./routes/todo');
 
 require('./db');
 
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
+
+
 const port = process.env.PORT || 5555;
 
 
