@@ -21,6 +21,19 @@ router.post('/add', (req, res) => {
             res.send(todo);
         }
     });
-})
+});
+
+router.put('/edit/:id', (req, res) => {
+    const id = req.params.id
+    const { title, description } = req.body;
+    Todo.findOneAndUpdate({_id: id}, {$set: { title, description } }, { useFindAndModify: false }, (err) => {
+        if(err) {
+            res.send(err);
+        } else {
+            res.send('updated');
+        }
+    });
+});
+
 
 module.exports = router;
