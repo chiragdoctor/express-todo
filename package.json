@@ -1,0 +1,27 @@
+{
+  "name": "express-todo",
+  "version": "1.0.0",
+  "description": "Nodejs api backend for todos",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chiragdoctor/express-todo.git"
+  },
+  "author": "Chirag Doctor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chiragdoctor/express-todo/issues"
+  },
+  "homepage": "https://github.com/chiragdoctor/express-todo#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.9.15"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
