@@ -35,5 +35,15 @@ router.put('/edit/:id', (req, res) => {
     });
 });
 
+router.delete('/delete/:id', (req, res) => {
+    const id = req.params.id;
+    Todo.deleteOne({_id: id}, (err) => {
+        if(err) {
+            res.send(err);
+        } else {
+            res.send('task deleted!!');
+        }
+    }); 
+});
 
 module.exports = router;
