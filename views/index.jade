@@ -18,11 +18,15 @@ html(lang='en')
               .card-body
                 h4.card-title Todo list
                 form(method='POST', action='/todo/add')
-                .add-items.d-flex
-                  input.form-control.todo-list-input(type='text', placeholder='What do you need to do today?')
-                  button.add.btn.btn-primary.font-weight-bold.todo-list-add-btn Add
+                    .add-items.d-flex
+                        input.form-control.todo-list-input(type='text', name='task' placeholder='What do you need to do today?')
+                        button.add.btn.btn-primary.font-weight-bold.todo-list-add-btn Add
                 .list-wrapper
                   ul.d-flex.flex-column-reverse.todo-list
-                    li
-                      | For what reason would it be advisable.
-                      i.remove.mdi.mdi-close-circle-outline
+                    each item in todos
+                        li 
+                            form(method='POST', action='/todo/edit/#{item._id}')
+                                input.form-control.todo-list-input(type='text', name='task' value=item.task)
+                                button.add.btn.btn-primary.font-weight-bold.todo-list-add-btn EDIT 
+                            form(method='POST', action='/todo/delete/#{item._id}')
+                                button.add.btn.btn-danger.font-weight-bold.todo-list-add-btn DELETE

@@ -3,42 +3,50 @@ const router = express.Router();
 const Todo = require('../../db/models/todo');
 
 router.get('/', async (req, res) => {
-    const todos = await Todo.find({})
-    res.render('index', {todos})
+    try {
+        const todos = await Todo.find({})
+        res.render('index', {todos})
+    } catch (err) {
+        res.send(err);
+    }
+    
 });
 
-router.post('/add', (req, res) => {
-    const todo = new Todo(req.body);
-    todo.save((err) => {
-        if(err) {
-            res.send(err);
-        } else {
-            res.send(todo);
-        }
-    });
+router.post('/add', async (req, res) => {
+    try {
+        console.log(req.body);
+        const todo = new Todo(req.body);
+        await todo.save();
+        res.redirect('/todo');
+    } catch(err) {
+        res.send(err);
+    }
+    
+
 });
 
-router.put('/edit/:id', (req, res) => {
+router.post('/edit/:id', (req, res) => {
     const id = req.params.id
-    const { title, description } = req.body;
-    Todo.findOneAndUpdate({_id: id}, {$set: { title, description } }, { useFindAndModify: false }, (err) => {
+    const { task } = req.body;
+    Todo.findOneAndUpdate({_id: id}, {$set: { task } }, { useFindAndModify: false }, (err) => {
         if(err) {
             res.send(err);
         } else {
-            res.send('updated');
+            res.redirect('/todo');
         }
     });
 });
 
-router.delete('/delete/:id', (req, res) => {
-    const id = req.params.id;
-    Todo.deleteOne({_id: id}, (err) => {
-        if(err) {
-            res.send(err);
-        } else {
-            res.send('task deleted!!');
-        }
-    }); 
+router.post('/delete/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        await Todo.deleteOne({_id: id});
+        res.redirect('/todo');
+    } catch(err) {
+        res.send(err)
+    }
+    
+     
 });
 
 module.exports = router;
