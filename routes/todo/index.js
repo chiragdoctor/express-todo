@@ -25,10 +25,24 @@ router.post('/add', async (req, res) => {
 
 });
 
+router.get('/edit/:id', async (req, res) => {
+    const id = req.params.id
+    console.log('id', id)
+    try {
+        const update_result = await Todo.findOneAndUpdate({_id: id}, {$set: { isEdit: true } }, { useFindAndModify: true });
+        console.log('update_results', update_result);
+        const todos = await Todo.find({});
+        res.render('edit', {todos});
+    } catch(err) {
+        res.send(err);
+    }
+    
+});
+
 router.post('/edit/:id', (req, res) => {
     const id = req.params.id
     const { task } = req.body;
-    Todo.findOneAndUpdate({_id: id}, {$set: { task } }, { useFindAndModify: false }, (err) => {
+    Todo.findOneAndUpdate({_id: id}, {$set: { task: task, isEdit: false } }, { useFindAndModify: false }, (err) => {
         if(err) {
             res.send(err);
         } else {
