@@ -17,7 +17,7 @@ html(lang='en')
             .card.px-3
               .card-body
                 h4.card-title Todo list
-                form(method='POST', action='/todo/add')
+                form(method='POST', action='/add')
                     .add-items.d-flex
                         input.form-control.todo-list-input(type='text', name='task' placeholder='What do you need to do today?')
                         button.add.btn.btn-primary.font-weight-bold.todo-list-add-btn Add
@@ -25,10 +25,10 @@ html(lang='en')
                   ul.d-flex.flex-column-reverse.todo-list
                     each item in todos
                         li
-                            form.col-lg-9(method='GET', action='/todo/edit/#{item._id}')
+                            form.col-lg-9(method='GET', action='/edit/#{item._id}')
                                 .add-items.d-flex
                                     p #{item.task}
                                     button.add.btn.btn-primary.font-weight-bold.todo-list-add-btn EDIT 
-                            form.col-lg-3(method='POST', action='/todo/delete/#{item._id}')
+                            form.col-lg-3(method='POST', action='/delete/#{item._id}')
                                 .add-items.d-flex
                                     button.add.btn.btn-danger.font-weight-bold.todo-list-add-btn DELETE
