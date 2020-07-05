@@ -16,7 +16,7 @@ router.post('/add', async (req, res) => {
 		console.log(req.body);
 		const todo = new Todo(req.body);
 		await todo.save();
-		res.redirect('/');
+		res.redirect('/todo');
 	} catch (err) {
 		res.send(err);
 	}
@@ -42,7 +42,7 @@ router.post('/edit/:id', (req, res) => {
 		if (err) {
 			res.send(err);
 		} else {
-			res.redirect('/');
+			res.redirect('/todo');
 		}
 	});
 });
@@ -51,7 +51,7 @@ router.post('/delete/:id', async (req, res) => {
 	try {
 		const id = req.params.id;
 		await Todo.deleteOne({ _id: id });
-		res.redirect('/');
+		res.redirect('/todo');
 	} catch (err) {
 		res.send(err);
 	}
