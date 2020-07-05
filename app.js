@@ -12,11 +12,11 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/todo', express.static(path.join(__dirname, 'public')));
 
 const port = process.env.PORT || 5555;
 
-app.use('/', todoRoutes);
+app.use('/todo', todoRoutes);
 
 app.listen(port, () => {
 	console.log(`Todo app start at ${port}`);
