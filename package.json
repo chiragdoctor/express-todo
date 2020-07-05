@@ -6,7 +6,7 @@
 	"scripts": {
 		"start": "node app.js",
 		"dev": "nodemon app.js",
-		"start:prod": "pm2 start app.js"
+		"start:prod": "pm2 start app.js --name 'todo'"
 	},
 	"repository": {
 		"type": "git",
